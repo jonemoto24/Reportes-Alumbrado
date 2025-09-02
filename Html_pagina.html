@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumbrado público de Aguascalientes</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Alumbrado público de Aguascalientes</h1>
+        <img src="Aguascalientes.png" alt="Logo" class="header-logo">
+    </header> 
+
+    <main> 
+        <section class="reporte-banner">
+            <h1>Información del reporte</h1>
+        </section>
+
+        <section id="Información del reporte">
+            <form id="reporteForm">
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" required>
+
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" required>
+
+                <label for="ubicacion">Colonia o Fraccionamiento:</label>
+                <input list="colonias" id="ubicacion" name="ubicacion" required>
+                <datalist id="colonias">
+                    <option value="San Marcos">
+                    <option value="Jardines de la Asunción">
+                    <option value="Altavista">
+                    <option value="Villa Teresa">
+                    <option value="Las Américas">
+                    <option value="Lomas del Sur">
+                    <option value="Bosques del Prado">
+                    <option value="Ojocaliente">
+                    <option value="Insurgentes">
+                    <option value="La Soledad">
+                    <option value="Villa Montaña">
+                    <option value="Mirador de las Culturas">
+                    <option value="Agua Clara">
+                    <option value="Aguascalientes Centro">
+                    <option value="Alameda">
+                    <option value="Albanta Norte">
+                    <option value="Alianza Ferrocarrilera">
+                    <option value="Ambrosía">
+                    <option value="Ampliación de Calvillito">
+                    <option value="Arroyo El Molino">
+                    <option value="Balcones de Ojocaliente">
+                    <option value="Balcones del Valle">
+                    <option value="Barandales de San José">
+                    <option value="Barrio de Santiago">
+                    <option value="Benito Palomino Dena">
+                    <option value="Bonafortuna">
+                    <option value="Bosque Sereno">
+                    <option value="Cumbres II">
+                    <option value="Infonavit Pilar Blanco">
+                    <option value="La Pona">
+                    <option value="Las Víboras">
+                    <option value="Montebello">
+                    <option value="Pirámides">
+                    <option value="Rancho San Carlos">
+                    <option value="San Francisco del Arenal">
+                    <option value="Torres de San Francisco">
+                    <option value="Triana">
+                    <option value="Villas de Nuestra Señora de la Asunción">
+                    <option value="Villas de San Nicolás">
+                </datalist>
+
+                <label for="calle">Calle:</label>
+                <input list="calles" id="calle" name="calle" required>
+                <datalist id="calles">
+                </datalist>
+
+                <label for="EntreCalles">Entre calles:</label>
+                <input list="entreCalles" id="entreCalles" name="entreCalles" required>
+
+                <label for="Telefono">Teléfono:</label>
+                <input type="tel" id="Telefono" name="Telefono" required>
+
+                <label for="Referencias">Imagen de referencia:</label>
+                <input type="file" id="Referencias" name="Referencias" accept="image/*" required>
+
+                <label for="descripcion">Descripción de la falla:</label>
+                <textarea id="descripcion" name="descripcion" required></textarea>
+
+                <button type="submit">Enviar reporte</button>
+            </form>
+        </section>
+        
+        <section class="Imagen-add">
+            <img src="Alumbrado.jpg" alt="Imagen de Alumbrado" class="header-add-logo">
+        </section>
+    </main>
+
+    <script>
+        document.getElementById("reporteForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const nombres = document.getElementById("nombres").value;
+            const apellidos = document.getElementById("apellidos").value;
+            const ubicacion = document.getElementById("ubicacion").value;
+            const calle = document.getElementById("calle").value;
+            const entreCalles = document.getElementById("entreCalles").value;
+            const telefono = document.getElementById("Telefono").value;
+            const descripcion = document.getElementById("descripcion").value;
+            const referencias = document.getElementById("Referencias").files[0];
+
+            doc.setFontSize(14);
+            doc.text("Reporte de Alumbrado Público", 20, 20);
+            doc.text(`Nombres: ${nombres}`, 20, 30);
+            doc.text(`Apellidos: ${apellidos}`, 20, 40);
+            doc.text(`Ubicación: ${ubicacion}`, 20, 50);
+            doc.text(`Calle: ${calle}`, 20, 60);
+            doc.text(`Entre calles: ${entreCalles}`, 20, 70);
+            doc.text(`Teléfono: ${telefono}`, 20, 80);
+            doc.text("Descripción de la falla:", 20, 90);
+            doc.text(descripcion, 20, 100, { maxWidth: 170 });
+
+            if (referencias) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imgData = event.target.result;
+                    doc.addImage(imgData, 'JPEG', 20, 120, 100, 75);
+                    doc.save("reporte_alumbrado.pdf");
+                };
+                reader.readAsDataURL(referencias);
+            } else {
+                doc.text("No se guardó la imagen de referencia.", 20, 120);
+                doc.save("reporte_alumbrado.pdf");
+            }
+        });
+    </script>
+    <script src="js/calle.js"></script>
+</body>
+</html>

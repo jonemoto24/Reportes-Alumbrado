@@ -1,0 +1,107 @@
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo general del cuerpo */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+}
+
+/* Encabezado azul con texto blanco e imagen a la derecha */
+header {
+    background-color: #192cdf; /* Azul institucional */
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Título del encabezado */
+header h1 {
+    font-size: 45px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+/* Imagen del encabezado (logo o ícono) */
+.header-logo {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Banner rojo con texto blanco */
+.reporte-banner {
+    background-color: #295098; /* Rojo fuerte */
+    padding: 20px;
+    text-align: left;
+    margin: 20px 0;
+    border-radius: 8px;
+    display: flexbox;
+}
+
+.reporte-banner h1 {
+    font-size: 28px;
+    color: white;
+    margin: 0;
+}
+
+/* Formulario alineado verticalmente */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Etiquetas del formulario */
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Campos de entrada */
+form input,
+form textarea,
+form select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Botón de envío */
+form button {
+    background-color: #192cdf;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0e1f9c;
+}
+
+.imagen-add {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.imagen-add-logo {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
